@@ -11,4 +11,26 @@ The projects will be displayed as a table on index.html. There would be button a
 */
 
 const addProjectForm = document.querySelector("form");
+
 const currentProjectNameDisplay = document.getElementById('current-project-name')
+const currentRow = document.getElementById('current-row-display');
+const subtractBtn = document.getElementById('subtract-btn');
+const addBtn = document.getElementById('add-btn');
+const saveBtn = document.getElementById('save-btn');
+const projectDisplay = document.getElementById('all-projects-display');
+
+
+let rowCount = 0;
+
+function addRow() {
+    rowCount++;
+    currentRow.innerHTML = rowCount;
+}
+
+function subtractRow() {
+    rowCount--;
+    currentRow.innerHTML = rowCount;
+}
+
+addBtn.addEventListener('click', addRow);
+subtractBtn.addEventListener('click', subtractRow);
