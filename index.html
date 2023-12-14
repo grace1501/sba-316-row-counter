@@ -4,10 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>A row counter for yarn projects</h1>
+    <h3>Current project:</h3>
+    <h3 id="current-project-name">A knit headband</h3>
+
+    <div id="row-counter">
+        <button id="subtract-btn" class="icon-btn" title="frog a row">-</button>
+        <span id="current-row">0</span>
+        <button id="add-btn" class="icon-btn" title="add a row">+</button>
+
+        <div>
+            <button id="save-btn">Save for later</button>
+        </div>
+
+    </div>
+
+    <div id="new-project" class="form-container">
+        <form>
+            <label for="project-name">Project name</label>
+            <input type="text" name="project-name" id="project-name" placeholder="What are you making?" required minlength="1" maxlength="100">
+            <br>
+            <br>
+            <label for="type">Type</label>
+            <input type="text" name="type" id="type" placeholder="Crochet, Knit or others">
+            <br>
+            <br>
+            <label for="tool-size">Tool size</label>
+            <input type="number" name="tool-size" id="tool-size" placeholder="in mm (numbers only)">
+            <br>
+            <br>
+            <label for="notes">Notes</label>
+            <input type="textarea" name="notes" id="notes" placeholder="details of the project">
+            <br>
+            <br>
+            <input type="submit" value="Add project" class="button">
+        </form>
+    </div>
+
+    <div id="all-projects-display">
+
+    </div>
+
 
     <script src="script.js"></script>
 </body>

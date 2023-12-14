@@ -1,0 +1,110 @@
+body {
+    background-color: blanchedalmond;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    font-family: 'Lucida Sans';
+    font-size: 1rem;
+}
+
+.page-title {
+    border: 1px solid #4e070c;
+    box-shadow: 5px 5px 2px rgba(100%, 50%, 50%, .33);
+}
+
+#current-row {
+    /* background-color: blue; */
+    font-size: 50px;
+    line-height: 100px;
+    padding: 10px;
+    border: 1px solid #4e070c;
+    border-radius: 4px;
+    box-shadow: 5px 5px 2px rgba(100%, 50%, 50%, .33);
+    
+}
+
+h1, h2, button, .button {
+    background-color: #4e070c;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+button:hover {
+    opacity: 0.75;
+}
+.icon-btn {
+    font-size: 20px;
+    width: 40px;
+}
+h3 {
+    color: #189e01;
+    text-align: center;
+    margin: 0.5rem;
+}
+
+.form-container {
+    display: flex;
+    align-content: space-around;
+}
+
+
+form {
+    display: block;
+    align-content: space-around;
+    text-align: right;
+}
+
+ul {
+    list-style-type: none;
+    margin: auto;
+    padding: auto;
+    overflow: hidden;
+    
+}
+
+li {
+    float: left;
+    border: 1px solid white;
+}
+
+li a {
+    display: block;
+    color: white;
+    background-color: #4e070c;
+    text-align: center;
+    padding: 16px 18px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #4e070c;
+    }
+    .active {
+        background-color: #04AA6D;
+        }
+
+div {
+    /* border: 1px solid black; */
+    /* this is just to see the div block when designing */
+    text-align: center;
+    margin: auto;
+    padding: 15px 50px;
+}
+
+hr {
+    border: 2px solid #189E01;
+}
+
+img {
+    width: 70%;
+    opacity: 1;
+    transition: opacity;
+}
+
+img:hover {
+    opacity: .25;
+}
+
+
