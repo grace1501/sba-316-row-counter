@@ -101,7 +101,6 @@ function getProjectObj(){
     let storagelength = localStorage.length;
     for (let i=0; i<storagelength; i++){
         let projectObj = JSON.parse(localStorage.getItem(localStorage.key(i)));
-        console.log(projectObj)
         displayProjects(projectObj);
     }
 
