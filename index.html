@@ -24,6 +24,8 @@
     </div>
 
     <div id="new-project" class="form-container">
+        <h3>Add a new project here</h3>
+        <br>
         <form>
             <label for="project-name">Project name</label>
             <input type="text" name="project-name" id="project-name" placeholder="What are you making?" required minlength="1" maxlength="100">
@@ -45,8 +47,14 @@
         </form>
     </div>
 
-    <div id="all-projects-display">
+    <div>
+        <button id="saved-projects-btn">Display all saved projects</button>
+    </div>
+    <div id="all-projects-display" class="display-style">
+        
+        <ul id="project-list">
 
+        </ul>
     </div>
 
 
