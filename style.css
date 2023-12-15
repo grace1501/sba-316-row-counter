@@ -6,6 +6,7 @@ body {
     align-content: space-around;
     font-family: 'Lucida Sans';
     font-size: 1rem;
+    padding: auto;
 }
 
 .page-title {
@@ -45,6 +46,8 @@ h3 {
 }
 
 .form-container {
+    margin: auto;
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-content: space-around;
@@ -58,21 +61,27 @@ form {
 }
 
 div {
-    /* border: 1px solid black; */
+    border: 2px solid red;
     /* this is just to see the div block when designing */
     text-align: center;
     margin: auto;
-    padding: 15px 50px;
+    padding: 20px;
 }
 
-#all-projects-display {
-    background-color: bisque;
-    display: flex;
-    flex-wrap: wrap;
-}
+/* #all-projects-display {
+    
+} */
 
 .display-style {
+    background-color: bisque;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
     display: none;
+}
+
+.display-style div {
+    display: inline-block;
 }
 
 .card {

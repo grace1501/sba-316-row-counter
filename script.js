@@ -39,20 +39,12 @@ const displayBtn = document.getElementById('saved-projects-btn');
 const projectDisplay = document.getElementById('all-projects-display');
 const projectList = document.getElementById('project-list')
 
-displayBtn.addEventListener('click', () => {
-    if (projectDisplay.style.display === 'none') {
-        projectDisplay.style.display = 'block';
-        getProjectObj();
-    }
-    else {
-        projectDisplay.style.display = 'none';
-        projectDisplay.innerHTML ='';
-    }
-    
-    
-})
 
-let rowCount = 0;
+// All logic starts here
+
+let currentProject = project1;
+let rowCount;
+let currentKey;
 
 function addRow() {
     rowCount++;
@@ -60,14 +52,44 @@ function addRow() {
 }
 
 function subtractRow() {
-    rowCount--;
+    if (rowCount>0) {
+        rowCount--;
+    }
     currentRow.innerHTML = rowCount;
 }
 
 addBtn.addEventListener('click', addRow);
 subtractBtn.addEventListener('click', subtractRow);
 
+// Show currentProject
+const currentProjectDetails = document.getElementById('current-project-details')
 
+function showCurrentProject(currentProject) {
+    currentProjectDetails.innerHTML = `<p>You are making a ${currentProject.name}, type ${currentProject.type}, using tool size of ${currentProject.size}</p>
+    <p>Notes: ${currentProject.notes}.</p>`
+    rowCount = currentProject.row;
+    currentRow.innerHTML = rowCount;
+}
+
+showCurrentProject(currentProject);
+
+
+function saveForLater(){
+    // save current project with current row count to local storage
+    currentProject.row = rowCount;
+    const jsonObj = JSON.stringify(currentProject);
+    localStorage.setItem(currentKey, jsonObj);
+
+    window.alert(`Your project: ${currentProject.name} has been saved.`);
+
+    displayAProject(currentKey, currentProject);
+
+}
+saveForLaterBtn.addEventListener('click', saveForLater);
+
+
+
+// ADD A NEW PROJECT
 addProjectForm.addEventListener('submit', validateNewProject);
 
 function validateNewProject(event) {
@@ -81,7 +103,7 @@ function validateNewProject(event) {
     projectObj.notes = notesEl.value;
     projectObj.row = 0;
 
-    // convert the name into an "id" by lower case and remove all white space
+    // convert the name into an "id" key by lower case and remove all white space
     let nameToSave = projectObj.name.toLowerCase().replaceAll(' ', '');
     // console.log(nameToSave);
 
@@ -96,35 +118,50 @@ function validateNewProject(event) {
     localStorage.setItem(nameToSave, jsonObj);
     window.alert(`Your project: ${projectObj.name} has been saved.`);
 
+    //display as a new card on page
+    displayAProject(nameToSave, projectObj);
+
     // done saving details, reset form
     addProjectForm.reset();
     return true;
 }
 
 
-function saveForLater(){
-    // save current project with current row count to local storage
-}
-saveForLaterBtn.addEventListener('click', saveForLater);
-
+// DISPLAY ALL SAVED PROJECT
+// toggle button
+displayBtn.addEventListener('click', () => {
+    if (projectDisplay.style.display == 'block') {
+        projectDisplay.style.display = 'none';
+        projectDisplay.innerHTML ='';
+    }
+    else {
+        projectDisplay.style.display = 'block';
+        getProjectObj();   
+    }
+    
+    
+})
 
 // get projects from local storage to display
 function getProjectObj(){
+    if (localStorage.length <= 0) {
+        projectDisplay.innerHTML = `<p>There is no saved project. Please add a new project to start.</p>`;
+        return;
+    }
     let storagelength = localStorage.length;
     for (let i=0; i<storagelength; i++){
         let projectObj = JSON.parse(localStorage.getItem(localStorage.key(i)));
-        displayProjects(projectObj);
+        displayAProject(localStorage.key(i), projectObj);
     }
 
 }
 
 // OPTION 1. Display saved projects with template
-// This one can only display one, need to display multiple
 
-function displayProjects(projectObj) {
+function displayAProject(key, projectObj) {
     const newCard = document.createElement('div')
     newCard.innerHTML = 
-    `<div class="card" style="width: 16rem;">
+    `<div class="card" style="width: 16rem;" id="${key}">
     <h4 class="card-title">${projectObj.name}</h4>
     <ul>
         <li>Type: ${projectObj.type}</li>
@@ -137,7 +174,31 @@ function displayProjects(projectObj) {
     </div>`
 
     projectDisplay.appendChild(newCard);
+
+    // Add resume button to the saved project
+    newCard.addEventListener('click', () => {
+        let projectObj = JSON.parse(localStorage.getItem(key));
+        currentProject = projectObj;
+        showCurrentProject(currentProject);
+        currentKey = key;
+
+        // erase the resumed project from the saved list after it has been displayed as current project
+        let self = document.getElementById(`${key}`);
+        self.parentNode.removeChild(self);
+    });
+    
 }
+
+
+// DON'T NEED THIS ANYMORE, use anonymous function inside displayAProject
+// function resumeFunc(e) {
+//     let key = e.target.getAttribute('id');
+//     console('id: ' + key);
+//     let projectObj = JSON.parse(localStorage.getItem(key));
+//     console.log(projectObj);
+//     currentProject = projectObj;
+//     showCurrentProject(currentProject);
+// }
 
 
 
