@@ -61,7 +61,7 @@ form {
 }
 
 div {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     /* this is just to see the div block when designing */
     text-align: center;
     margin: auto;
