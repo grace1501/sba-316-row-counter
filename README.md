@@ -1,4 +1,6 @@
 # SBA 316: The Document Object Model
+
+Live link: https://grace1501.github.io/sba-316-row-counter/
 ## Project name: A row counter for yarn art
 ### Descriptions: 
 A single page web application that ultilize DOM manipulation to react to the user's interaction.
