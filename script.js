@@ -11,7 +11,6 @@ The projects will be displayed as a table on index.html. There would be button a
 */
 
 //Sample data to work with functions
-
 const project1 = {
     'name' : 'beanie hat',
     'type' : 'knit',
@@ -177,6 +176,10 @@ function displayAProject(key, projectObj) {
 
     // Add resume button to the saved project
     newCard.addEventListener('click', () => {
+        // auto save the current display project
+        saveForLater();
+
+        // get the project card to display as current project
         let projectObj = JSON.parse(localStorage.getItem(key));
         currentProject = projectObj;
         showCurrentProject(currentProject);
