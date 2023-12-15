@@ -13,9 +13,10 @@ The projects will be displayed as a table on index.html. There would be button a
 //Sample data to work with functions
 
 const project1 = {
-    'name' : 'project 1',
+    'name' : 'beanie hat',
     'type' : 'knit',
     'size': 5,
+    'row' : 10,
     'notes' : 'a knit beanie hat for adult'
 }
 
@@ -39,7 +40,16 @@ const projectDisplay = document.getElementById('all-projects-display');
 const projectList = document.getElementById('project-list')
 
 displayBtn.addEventListener('click', () => {
-    projectDisplay.classList.toggle('display-style');
+    if (projectDisplay.style.display === 'none') {
+        projectDisplay.style.display = 'block';
+        getProjectObj();
+    }
+    else {
+        projectDisplay.style.display = 'none';
+        projectDisplay.innerHTML ='';
+    }
+    
+    
 })
 
 let rowCount = 0;
@@ -63,11 +73,13 @@ addProjectForm.addEventListener('submit', validateNewProject);
 function validateNewProject(event) {
     event.preventDefault();
 
+    // save a new project, start with 0 row
     const projectObj = {};
     projectObj.name = projectNameEl.value;
     projectObj.type = typeEl.value;
     projectObj.size = toolSizeEl.value;
     projectObj.notes = notesEl.value;
+    projectObj.row = 0;
 
     // convert the name into an "id" by lower case and remove all white space
     let nameToSave = projectObj.name.toLowerCase().replaceAll(' ', '');
@@ -91,7 +103,7 @@ function validateNewProject(event) {
 
 
 function saveForLater(){
-
+    // save current project with current row count to local storage
 }
 saveForLaterBtn.addEventListener('click', saveForLater);
 
@@ -108,26 +120,35 @@ function getProjectObj(){
 
 // OPTION 1. Display saved projects with template
 // This one can only display one, need to display multiple
+
+function displayProjects(projectObj) {
+    const newCard = document.createElement('div')
+    newCard.innerHTML = 
+    `<div class="card" style="width: 16rem;">
+    <h4 class="card-title">${projectObj.name}</h4>
+    <ul>
+        <li>Type: ${projectObj.type}</li>
+        <li>Tool size: ${projectObj.size}mm</li>
+        <li>Row: ${projectObj.row}</li>
+        <li>Notes: ${projectObj.notes}</li>
+    </ul>
+    
+    <button>Resume this project</button>
+    </div>`
+
+    projectDisplay.appendChild(newCard);
+}
+
+
+
+// OPTION 2. Display saved project by creating new elements - DID NOT USE THIS / commented out the code in html
+
 // function displayProjects(projectObj) {
-//     projectDisplay.innerHTML = 
-//     `<ul>
-//     <h4>Saved project: ${projectObj.name}</h4>
-//         <li>This is a ${projectObj.type} project</li>
-//         <li>The needle/hook size is ${projectObj.size}mm</li>
-//         <li>Note: ${projectObj.notes}</li>
-//     </ul>`
+//     projectDisplay.style.backgroundColor = 'white';
+
+//     for (let key in projectObj) {
+//         projectList.appendChild(document.createElement('li')).textContent = projectObj[key];
+//     }
 // }
 
 
-
-// OPTION 2. Display saved project by creating new elements
-// Need to display this in a better way for viewing - Table data?
-function displayProjects(projectObj) {
-    projectDisplay.style.backgroundColor = 'white';
-
-    for (let key in projectObj) {
-        projectList.appendChild(document.createElement('li')).textContent = projectObj[key];
-    }
-}
-
-getProjectObj();

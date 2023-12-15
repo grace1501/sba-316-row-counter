@@ -64,12 +64,23 @@ div {
     margin: auto;
     padding: 15px 50px;
 }
-/* 
-#all-projects-display {
 
-} */
+#all-projects-display {
+    background-color: bisque;
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .display-style {
     display: none;
+}
+
+.card {
+    text-align: left;
+    border: solid 1px #4e070c;
+}
+
+h4 {
+    padding: 0;
 }
 
